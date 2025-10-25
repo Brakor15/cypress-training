@@ -21,7 +21,7 @@ function deleteTask(task: Task): void {
   tasks.value = tasks.value.filter(t => t.id !== task.id)
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <template>
