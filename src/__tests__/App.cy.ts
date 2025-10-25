@@ -11,22 +11,28 @@ describe('App', () => {
 describe('Afficher la todo list', () => {
   it('Affiche une liste de tâches', () => {
     cy.mount(App)
-    cy.get('li').should('contain', "Faire le ménage").should('have.length', 1)
+    cy.get('li').should('contain', "Faire le ménage").and('have.length', 1)
     cy.get('input').should('be.empty')
-    cy.get('[id="add-button"]').should('not.be.disabled').should('contain', 'Add task')
-    cy.get('[data-cy="delete-button"]').should('not.be.disabled').should('contain', 'Delete')
+    cy.get('[id="add-button"]').should('not.be.disabled').and('contain', 'Add task')
+    cy.get('[data-cy="delete-button"]').should('not.be.disabled').and('contain', 'Delete')
   })
 })
 
 describe("Ajout d'une tâche", () => {
   it('Ajouter une tâche et vérifier le rendu', () => {
     cy.mount(App)
+    // Vérifier l'initialisation
     cy.get('li').should('contain', "Faire le ménage").and('have.length', 1)
-    cy.get('[data-cy="newTask"]').should('be.empty')
-    cy.get('[data-cy="newTask"]').type("Cuisiner")
+    cy.get('[data-cy="newTask"]').as("newTask")
+    cy.get('@newTask').should('be.empty')
+
+    // Ajout d'une tâche
+    cy.get('@newTask').type("Cuisiner")
     cy.get('[id="add-button"]').click()
+
+    // Vérifier le résultat
     cy.get('li').should('have.length', 2)
-    cy.get('li').eq(0).should('contain', "Faire le ménage")
-    cy.get('li').eq(1).should('contain', "Cuisiner")
+    cy.get('li').eq(0).contains("Faire le ménage")
+    cy.get('li').eq(1).contains("Cuisiner")
   })
 })
