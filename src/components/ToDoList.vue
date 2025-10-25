@@ -27,14 +27,14 @@ defineProps<Props>()
 <template>
   <h1>{{ title }}</h1>
   <form @submit.prevent="addTask">
-    <input placeholder="New task ..." v-model="newTask" />
-    <button>Add task</button>
+    <input data-cy="newTask" placeholder="New task ..." v-model="newTask" />
+    <button id="add-button">Add task</button>
   </form>
   <ul>
     <li v-for="task in tasks" :key="task.id">
       <input type="checkbox" v-model="task.done"/>
       {{ task.title }}
-      <button @click="deleteTask(task)">Delete</button>
+      <button data-cy="delete-button" @click="deleteTask(task)">Delete</button>
     </li>
   </ul>
 </template>
