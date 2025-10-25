@@ -11,7 +11,6 @@ const currentUser = ref<CurrentUser>({
 </script>
 
 <template>
-  <h1>You did it!</h1>
   <ToDoList title="To-Do list" />
   <CurrentUser id="currentUser.id" email="currentUser.email" login="currentUser.login"/>
 </template>
