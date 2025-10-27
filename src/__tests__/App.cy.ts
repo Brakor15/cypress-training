@@ -36,3 +36,13 @@ describe("Ajout d'une tâche", () => {
     cy.get('li').eq(1).contains("Cuisiner")
   })
 })
+
+describe("Suppression d'une tâche", () => {
+  it('Supprimer une tâche', () => {
+    cy.mount(App)
+    // Vérifier l'initialisation
+  
+    cy.get('li').eq(0).find('[data-cy="delete-button"]').click()
+    cy.get('li').should('have.length', 0)
+  })
+})
